@@ -23,7 +23,6 @@ socket.listen("players", (m)=>{
 })
 
 function update(){
-    console.log("update")
     lastupdate = Date.now()
     config.channels.compteur_mc.setName("Connectés sur Entasia : "+vars.totalonlines.length).catch(no)
 }

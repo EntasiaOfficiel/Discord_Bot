@@ -11,7 +11,7 @@ class time{
 			else target = message.guild.members.get(arg[1])
 			if(!target)return message.channel.send("Cet utilisateur n'existe pas !")
 		}else target = message.member
-		message.channel.send(ta.user.username+" est la depuis "+secondsToTime(ta.joinedTimestamp/1000))
+		message.channel.send(target.user.username+" est la depuis "+secondsToTime((Date.now()-target.joinedTimestamp)/1000))
     }
 }
 

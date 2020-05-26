@@ -6,6 +6,7 @@ const { timeToSeconds, secondsToTime } = require('entasia/GlobalAPI').functions
 class mute{
 	constructor(){
 		this.executable = ["text"]
+		this.alias = ["chut"]
 		this.role = config.roles.staff
 	}
 	errMsg (message, text){

@@ -38,7 +38,7 @@ function connect(){
 		if(m.charCodeAt(m.length-2) == 13)m = m.substring(0, m.length-2)
 		else if(m.charCodeAt(m.length-1) == 10) m=m.substring(0, m.length-1)
 		for(let i of m.split("\n")){
-			logger("Paquet recu : "+i)
+			// logger("Paquet recu : "+i)
 			socketC.emit('line', i)
 		}
 	

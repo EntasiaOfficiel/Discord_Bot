@@ -2,7 +2,7 @@
 
 config.channels.pub.createMessageCollector((message) => {
 	if(message.author.bot||message.system)return
-	functions.deleteMessage(message)
+	delmsg(message)
 	if(message.content.length < 1)
 		return message.author.send("Pour pouvoir être validé , ton message doit faire plus de 350 caractères ! ( C'est pas si long que ca en à l'air , essaye et tu verra ^^ )").catch(no)
 	
@@ -27,18 +27,20 @@ async function pubReact(message){
 		else if(reaction.emoji.id==config.emojis.non.id)a=false
 		else return reaction.remove(user)
 
-		let b = await reaction.fetchUsers()
-		if(b.size <= 1)return
-		functions.deleteMessage(message)
-		collector.stop()
-		let u = message.guild.members.get(message.embeds[0].author.url.substr(7, 18))
-		if(a){
-			config.channels.pub.send(new CustomEmbed("publicité de "+message.embeds[0].author.name)
-				.setDescription(message.embeds[0].description)
-				.setAuthor(message.embeds[0].author.name, message.embeds[0].author.iconURL))
-			u.user.send("Félicitations ! Ta publicité vient d'être publiée :slight_smile:")
-			
-		}else u.user.send("Je suis désolé , ta publicité à été refusée par le Staff :cry: ")
+		let b = await reaction.users.fetch()
+		if(b.size >= 6){
+			delmsg(message)
+			collector.stop()
+			let u = config.entasia.members.cache.get(message.embeds[0].author.url.substr(7, 18))
+			if(!u)return
+			if(a){
+				config.channels.pub.send(new CustomEmbed("publicité de "+message.embeds[0].author.name)
+					.setDescription(message.embeds[0].description)
+					.setAuthor(message.embeds[0].author.name, message.embeds[0].author.iconURL))
+				u.user.send("Félicitations ! Ta publicité vient d'être publiée :slight_smile:")
+				
+			}else u.user.send("Je suis désolé , ta publicité à été refusée par le Staff :cry: ")
+		}
 	})
 }
 

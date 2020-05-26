@@ -1,7 +1,7 @@
 const { Client } = require('discord.js')
 
 config = require('entasia/config')
-bot = new Client({ disableMentions: "all" })
+bot = new Client({ allowedMentions: {parse:["users"]}, disableMentions: "everyone" })
 bot.login(require("entasia/token"))
 .catch((err)=>{throw err});
 	

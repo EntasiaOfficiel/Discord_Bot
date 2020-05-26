@@ -73,13 +73,9 @@ bot.on('message', async message => {
 			}
 		}
 	}
-	let error
 	try{
-		error = await cmd.execute(message, args)
-	}catch(e){
-		error = e
-	}
-	if(error){
+		await cmd.execute(message, args)
+	}catch(error){
 		logger("Une erreur est survenue !")
 		console.log(error)
 		message.channel.send(new CustomEmbed([message.author.username, command]).setType("error", "Erreur !")

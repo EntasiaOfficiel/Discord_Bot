@@ -8,24 +8,14 @@ class editmsg{
 	async execute (message, arg){
 		delmsg(message)
 		if(arg[2]){
-			if(arg[1].length != 18==true||arg[1]>1 == false)return message.channel.send("Mesage invalide !")
-			var final
-			await message.channel.fetchMessage(arg[1])
+			if(arg[1].length != 18||!arg[1]>1)return message.channel.send("Mesage invalide !")
+
+			let final
+			await message.channel.messages.fetch(arg[1])
 			.catch(no)
 			.then(a =>{
-				if(a) final = a
+				 final = a
 			})
-			if(!final){
-				for(var [k, v] of message.guild.channels){
-					if(v.type != "text")continue
-					await v.fetchMessage(arg[1])
-					.catch(no)
-					.then(a =>{
-						if(a)final = a
-					})
-					if(final)break
-				}
-			}
 			if(final){
 				if(final.author.id != bot.user.id)message.channel.send("Ce message n'a pas été envoyé par le bot !")
 				final.edit(message.content.substring(arg[0].length + arg[1].length + 3))
