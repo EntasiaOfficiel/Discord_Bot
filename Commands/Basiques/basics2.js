@@ -25,6 +25,14 @@ class discord{
 	}
 }
 
+class github{
+	constructor(){
+	}
+    async execute(message){
+		message.channel.send("Retrouve tout nos projets sur ntore Github ! https://github.com/EntasiaOfficiel")
+	}
+}
+
 const quizix = config.entasia.members.cache.get("372295146987061250")
 
 class credits{
@@ -41,4 +49,4 @@ class credits{
 }
 
 
-module.exports.commands = { discord, ip, members, credits }
+module.exports.commands = { discord, ip, members, credits, github }
