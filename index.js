@@ -1,5 +1,5 @@
 const { Client } = require('discord.js')
-// test
+
 config = require('entasia/config')
 bot = new Client({ allowedMentions: {parse:["users"]}, disableMentions: "everyone" })
 bot.login(require("entasia/token"))
