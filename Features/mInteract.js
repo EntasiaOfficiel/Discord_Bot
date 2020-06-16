@@ -2,7 +2,7 @@
 const noDeleteMSG = require("entasia/GlobalAPI").internal.noDeleteMSG
 
 bot.on("messageDelete", async function(message){
-	if(!message.guild||message.system||!message.content)return
+	if(!message.guild||message.system||!message.content||message.author.bot)return
 	if(message.channel.id==config.channels.bureau_admin.id)return
 
 	if(noDeleteMSG.includes(message.id)){
@@ -28,7 +28,7 @@ bot.on("messageDelete", async function(message){
 	
 })
 bot.on("messageUpdate", function(message, newMessage){
-	if(!message.guild||message.system||!message.content||!newMessage.content)return
+	if(!message.guild||message.system||!message.content||!newMessage.content||message.author.bot)return
 	if(message.channel.id==config.channels.bureau_admin.id)return
 
 	if(message.content.toLowerCase() == newMessage.content.toLowerCase())return
@@ -44,10 +44,10 @@ bot.on("messageUpdate", function(message, newMessage){
 	if(newMessage.content.length>1024)embed.addField("Nouveau message : ", newMessage.content.substr(0 ,1021)+"...")
 	else embed.addField("Nouveau message : ", newMessage.content)
 	
-	log(embed, message)
+	log(embed)
 })
 
-function log(embed, message){
+function log(embed){
 
 	embed.setTimestamp()
 	config.channels.logs_messages.send(embed)

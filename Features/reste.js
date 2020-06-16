@@ -12,3 +12,8 @@ for(let [k, user] of config.entasia.members.cache){
 		user.roles.add(config.roles.default)
 	}
 }
+
+const CronJob = require('cron').CronJob;
+new CronJob('0 0 * * *', ()=>{
+	config.channels.general_public.send("Joyeux hier de demain !")
+}, null, true, 'Europe/Paris');

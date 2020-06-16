@@ -1,10 +1,12 @@
+const MAX = 70
+
 class clear{
 	constructor(){
 		this.executable = ["text"]
 		this.perm = "MANAGE_MESSAGES"
 	}
     async execute (message, arg){
-        if(arg[1] >= 1&&arg[1] <= 20){
+        if(arg[1] >= 1&&arg[1] <= MAX){
 			if(arg[2]){
 				if (message.mentions.members.size > 0)
 					var user = message.mentions.members.first()
@@ -31,7 +33,7 @@ class clear{
 					)
 				}
 			})	
-        }else message.channel.send("Mentionnez un nombre entre 1 et 20 !")
+        }else message.channel.send("Mentionnez un nombre entre 1 et "+MAX+" !")
     }
 }
 
