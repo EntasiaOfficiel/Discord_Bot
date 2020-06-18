@@ -60,7 +60,7 @@ bot.on('message', async message => {
 					return message.channel.send(
 					new CustomEmbed([message.author.username, command])
 					.setType("perm", "Permissions insuffisantes")
-					.setDescription("Tu n'a pas la permission ! :cry: ("+cmd.perm+")"))
+					.setDescription("Tu n'as pas la permission ! :cry: ("+cmd.perm+")"))
 				}
 			}
 			if(cmd.role){
@@ -68,7 +68,7 @@ bot.on('message', async message => {
 					return message.channel.send(
 					new CustomEmbed([message.author.username, command])
 					.setType("perm", "Permissions insuffisantes")
-					.setDescription("Tu n'a pas le rôle requis ! :cry: ("+cmd.role.name+")"))
+					.setDescription("Tu n'as pas le rôle requis ! :cry: ("+cmd.role.name+")"))
 				}
 			}
 		}
