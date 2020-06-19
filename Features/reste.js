@@ -13,7 +13,8 @@ for(let [k, user] of config.entasia.members.cache){
 	}
 }
 
-const CronJob = require('cron').CronJob;
-new CronJob('0 0 * * *', ()=>{
-	config.channels.general_public.send("Joyeux hier de demain !")
-}, null, true, 'Europe/Paris');
+// faut pas chercher à comprendre :)
+// const CronJob = require('cron').CronJob;
+// new CronJob('0 0 * * *', ()=>{
+// 	config.channels.general_public.send("Joyeux hier de demain !")
+// }, null, true, 'Europe/Paris');
