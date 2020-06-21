@@ -2,7 +2,6 @@ const { secondsToTime } = require('entasia/GlobalAPI').functions
 
 class uptime{
 	constructor(){
-		this.alias = ["botstat"]
 	}
     execute(message){
 		message.channel.send("Je vous surveille depuis : "+secondsToTime(bot.uptime/1000))
