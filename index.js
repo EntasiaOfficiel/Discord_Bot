@@ -51,6 +51,7 @@ bot.on("ready", async function(){
 		config.roles_reacts[i] = config.entasia.roles.cache.get(config.roles_reacts[i])
 		if(!config.roles_reacts[i])logger("Erreur lors de la récupération de "+i+" !")
 	}
+	
 	require('./Commands/Commands')
 	require('./Features')
 	logger("Fini !")

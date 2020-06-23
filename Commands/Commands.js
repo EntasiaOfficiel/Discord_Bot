@@ -1,7 +1,7 @@
 const { Hastebin } = require('entasia/GlobalAPI').functions
 const { prefix } = require('entasia/config')
 const fs = require('fs')
-var MyCommands = new Object()
+var loadedCmds = new Object()
 let dirsearch = ["Basique", "Economie", "Moderation", "Jeux", "Liaison", "Autres"]
 fs.readdir("./Commands/", (err, dirs) => {
 	if(err)throw err
@@ -16,10 +16,10 @@ fs.readdir("./Commands/", (err, dirs) => {
 					for(let k in commands){
 						let inst = new commands[k]()
 						inst.type = dir
-						MyCommands[k] = inst
+						loadedCmds[k] = inst
 
 						if(inst.alias){
-							for(let i of inst.alias)MyCommands[i] = inst
+							for(let i of inst.alias)loadedCmds[i] = inst
 						}
 					}
 
@@ -43,8 +43,8 @@ bot.on('message', async message => {
 
 	let command = args[0].toLowerCase()
 	let cmd
-	if(typeof MyCommands[command] == "object")cmd = MyCommands[command]
-	else if(typeof MyCommands[command] == "string")cmd = MyCommands[MyCommands[command]]
+	if(typeof loadedCmds[command] == "object")cmd = loadedCmds[command]
+	else if(typeof loadedCmds[command] == "string")cmd = loadedCmds[loadedCmds[command]]
 	else return
 
 	// OPTIONS DE LA COMMANDE
@@ -90,4 +90,4 @@ bot.on('message', async message => {
 	}
 })
 
-module.exports.variables = { MyCommands }
+module.exports.variables = { MyCommands: loadedCmds }

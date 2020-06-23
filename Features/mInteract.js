@@ -4,7 +4,7 @@ const noDeleteMSG = require("entasia/GlobalAPI").internal.noDeleteMSG
 bot.on("messageDelete", async function(message){
 	if(!message.guild||message.system||!message.content||message.author.bot)return
 	if(message.channel.id==config.channels.bureau_admin.id)return
-
+	
 	if(noDeleteMSG.includes(message.id)){
 		return noDeleteMSG.splice(noDeleteMSG.indexOf(message.id), 1)
 	}

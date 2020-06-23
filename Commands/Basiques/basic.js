@@ -15,7 +15,7 @@ class avatar{
 		if(arg[1]){
 			if (message.mentions.users.size > 0)ava = message.mentions.members.first()
 			else{
-				ava = message.guild.members.get(arg[1])
+				ava = message.guild.members.cache.get(arg[1])
 				if(!ava)return message.channel.send("Cet utilisateur n'existe pas !")
 			}
 		}else ava = message.member

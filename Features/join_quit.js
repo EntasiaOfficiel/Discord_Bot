@@ -90,7 +90,7 @@ bot.on("guildMemberRemove", function(member){
 })
 
 function updatem(){
-	config.channels.compteur_discord.setName("Membres Discord :  "+config.entasia.members.cache.size).catch(no)
+	config.channels.compteur_discord.setName("Membres Discord :  "+config.entasia.members.cache.size)
 }
 
 updatem()
