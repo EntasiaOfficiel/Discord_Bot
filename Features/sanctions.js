@@ -5,7 +5,6 @@ function b64(a){
 }
 
 socket.listen("sanc", (m)=>{
-    console.log(m)
     
     let args = m.split(" ")
     let se = {}
