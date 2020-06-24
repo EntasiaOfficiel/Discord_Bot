@@ -25,7 +25,8 @@ socket.listen("players", (m)=>{
 
 function update(){
     lastupdate = Date.now()
-    bot.user.setPresence({ activity: { name: "Connectés : "+vars.totalonlines.length } })
+    let s = vars.totalonlines.length == 1 ? "" : "s"
+    bot.user.setPresence({ activity: { name: vars.totalonlines.length+" connecté"+s , type: "WATCHING" }})
 }
 
 update()
