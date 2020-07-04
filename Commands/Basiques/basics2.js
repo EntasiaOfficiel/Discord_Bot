@@ -29,7 +29,7 @@ class github{
 	constructor(){
 	}
     async execute(message){
-		message.channel.send("Retrouve tout nos projets sur ntore GitHub ! https://github.com/EntasiaOfficiel")
+		message.channel.send("Retrouve tout nos projets sur notre GitHub ! https://github.com/EntasiaOfficiel")
 	}
 }
 
