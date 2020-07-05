@@ -2,22 +2,22 @@
     "dev": false,
     "prefix": ".",
     "talkchar": "$",
-	"owner": "294134773901688833",
+    "owner": "294134773901688833",
     "entasia": "435822686791270431",
-    
-    
+
+
     "roles_reacts":{
         "mcpingwave": "467907937059471380"
     },
-    
+
     "emojis":{
         "oui": "548911339373068289",
         "non": "548911347769802852",
         "ping": "548913797453053953",
         "report": "558043781040177161",
-        "money": "632985755282833409" 
+        "money": "632985755282833409"
     },
-    
+
     "roles":{
         "default": "435823191051730945",
         "mute": "487491315408306176",
@@ -37,7 +37,7 @@
         "bureau_admin": "436193488946855937",
         "logs": "708632410321059881",
         "logs_messages": "596408085459894272",
-        
+
         "report": "596402392837390367",
         "reportcheck": "596385235411927061",
         "pub": "453998460782510131",
@@ -45,7 +45,7 @@
 
         "roles": "496349403297218560"
     },
-    
+
     "descriptions": {
         "avatar": "Affiche ta photo de profil ou celle du joueur voulu !",
         "share": "Gènere un lien te permettant de faire des partages d'écran dans des salons vocaux , dans des serveurs Discord !",
