@@ -1,5 +1,5 @@
 const { Hastebin } = require('entasia/GlobalAPI').functions
-const { prefix } = require('entasia/config')
+const { prefix } = require('../config')
 const fs = require('fs')
 var loadedCmds = new Object()
 let dirsearch = ["Basique", "Economie", "Moderation", "Jeux", "Liaison", "Autres"]

@@ -18,7 +18,6 @@ function addSanction(embed, se){
     }
     if(se.type!="2"){
         embed.addField(":alarm_clock: Durée", secondsToTime(se.time), INLINE)
-        embed.addField(":alarm_clock: Temps restant", secondsToTime((se.when/1000+se.time) - Date.now()/1000), INLINE)
     }
     embed.addField(":question: Raison", se.reason, INLINE)
     return embed

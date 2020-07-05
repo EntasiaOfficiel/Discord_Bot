@@ -1,0 +1,28 @@
+{
+  "name": "discord_bot",
+  "version": "1.0.0",
+  "description": "Bot discord du serveur Minecraft d'Entasia",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EntasiaOfficiel/Discord_Bot.git"
+  },
+  "author": "Itrooz",
+  "contributors": [
+    "WeeskyBDW"
+  ],
+  "license": "GNU GPL V3.0",
+  "bugs": {
+    "url": "https://github.com/EntasiaOfficiel/Discord_Bot/issues"
+  },
+  "homepage": "https://github.com/EntasiaOfficiel/Discord_Bot#readme",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "request": "^2.88.2",
+    "mysql": "^2.18.1",
+    "sqlite3": "^5.0.0"
+  }
+}

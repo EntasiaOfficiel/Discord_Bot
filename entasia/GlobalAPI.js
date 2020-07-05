@@ -1,5 +1,5 @@
 const request = require('request')
-const config = require('entasia/config')
+const config = require('../config')
 
 function Hastebin(text){
 	return new Promise(async resolve => {
