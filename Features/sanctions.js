@@ -11,14 +11,15 @@ socket.listen("sanc", (m)=>{
     se.type = args[1]
     se.on = args[2]
     se.by = args[3]
-    se.when = args[4]
-    se.time = args[5]
+    se.when = Number(args[4])
+    se.time = Number(args[5])
     se.reason = b64(args[6])
 
     let embed = new CustomEmbed()
     embed.setTimestamp()
 
     if(args[0]=="0"){
+        console.log(se)
         Sanctions.addSanction(embed, se)
         embed.setTitle("Nouvelle sanction :")
     }else if(args[0]=="1"){
