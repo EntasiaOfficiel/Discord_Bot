@@ -8,7 +8,7 @@ config.channels.report.createMessageCollector((message) => {
 	.then((m)=> reportReact(m))
 })
 
-async function reportReact(message){
+async function reportReact(message, reportedPlayer, reportReason){
 	await message.react("✅")
 	await message.react("❌")
 	await message.react("🤐")
@@ -20,14 +20,15 @@ async function reportReact(message){
 			delmsg(message)
 			let embed = new CustomEmbed("Logs").setType("Log", "Rapport de dénonciation")
 			if(reaction.emoji.name == "✅"){
-				embed.addField("de", "Dénonciation acceptée")
+				embed.addField("Status", "Dénonciation acceptée")
 				u.user.send("Ton report à été vu et déclaré vrai par le staff ! :slight_smile:")
 			}else if(reaction.emoji.name == "❌"){
 				u.user.send("Ton report à été vu et déclaré invalide ! :slight_frown: ")
-				embed.addField("de", "Dénonciation refusé")
-			}else embed.addField("de", "Dénonciation étouffée")
+				embed.addField("Status", "Dénonciation refusé")
+			}else embed.addField("Status", "Dénonciation étouffée")
 			embed.addField("de", u.user.tag)
-			embed.addField("par", user.tag)
+			embed.addField("envers", reportedPlayer)
+			embed.addField("raison", reportReason)
 			functions.logInfo(embed)
 		}
 	})
@@ -39,3 +40,5 @@ config.channels.reportcheck.messages.fetch({limit: 100}).then((data)=>{
 			else reportReact(msg)
 		}
 })
+
+module.exports.reportReact = reportReact
