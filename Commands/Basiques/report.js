@@ -23,7 +23,7 @@ class report {
     async execute(message, args) {
         try {
             await message.author.send("Hey ! Je vais t'aider dans ta démarches de report")
-            message.channel.send("Regarde tes messages privés :smile:")
+            message.channel.send("Regarde tes messages privés :smiley:")
         }
         catch(e) {}
 
