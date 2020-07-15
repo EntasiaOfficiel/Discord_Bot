@@ -1,13 +1,3 @@
-config.channels.report.createMessageCollector((message) => {
-	if(message.author.bot||message.system)return
-	delmsg(message)
-	message.author.send("Merci de ta dénonciation ! le Staff y jettera bientôt un oeil !").catch(no)
-	config.channels.reportcheck.send(new CustomEmbed("Report de "+message.author.username)
-	.setAuthor(message.author.username, message.author.avatarURL, "http://"+message.author.id+".fr")
-	.setDescription(message.content))
-	.then((m)=> reportReact(m))
-})
-
 async function reportReact(message, reportedPlayer, reportReason){
 	await message.react("✅")
 	await message.react("❌")
