@@ -14,7 +14,6 @@
         "oui": "548911339373068289",
         "non": "548911347769802852",
         "ping": "548913797453053953",
-        "report": "558043781040177161",
         "money": "632985755282833409" 
     },
     
@@ -37,8 +36,7 @@
         "bureau_admin": "436193488946855937",
         "logs": "708632410321059881",
         "logs_messages": "596408085459894272",
-        
-        "report": "596402392837390367",
+
         "reportcheck": "596385235411927061",
         "pub": "453998460782510131",
         "pubcheck": "596379804232712193",
@@ -74,6 +72,7 @@
         "roleping": "Te permet de rendre un role mentionnable pendant 8 secondes",
         "sondage": "Démarre un sondage ! ",
         "two": "Il ne vaut mieux pas chercher à comprendre cette commande",
-        "yn": "Ajoute les emotes :oui: et :non: au dernier message envoyé"
+        "yn": "Ajoute les emotes :oui: et :non: au dernier message envoyé",
+        "report": "Signaler un joueur du serveur"
     }
 }

@@ -1,12 +1,12 @@
 const config = require("entasia/config")
-const {reportReact, askInformation } = require("../../Features/poukave")
+const {reportReact, askInformation } = require("../../Features/report")
 const { MessageEmbed } = require("discord.js")
 
 class report {
     constructor(){}
     async execute(message, args) {
         try {
-            await message.author.send("Hey ! Je vais t'aider dans ta démarches de report")
+            message.author.send("Hey ! Je vais t'aider dans ta démarches de report")
             message.channel.send("Regarde tes messages privés :smile:")
         }
         catch(e) {}
