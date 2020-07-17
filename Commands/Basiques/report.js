@@ -1,23 +1,6 @@
 const config = require("entasia/config")
-const reportReact = require("../../Features/poukave")
+const {reportReact, askInformation } = require("../../Features/poukave")
 const { MessageEmbed } = require("discord.js")
-async function askInformation(message, askMessage = "Ce message ne devrait pas apparaitre, merci de contacter iTrooz_#2050 ou WeeskyBDW#6172", time = 30000, filter = (user => message.author.bot == false)) {
-    if(message === undefined) return console.log("[Erreur] Commande de report.js : le message n'a pas été spécifié dans la fonction ")
-    return new Promise(async(resolve, reject) => {
-        message.author.send(askMessage).then(async questionMsg => {
-
-            const responce = await questionMsg.channel.awaitMessages(filter, {max: 1, time: time, errors: ['time']}).catch(async () =>  {
-                reject(`Tu as mis trop de temps à faire ton signalement, merci de refaire .report dans ${config.channels.salon_bot}`)
-                return
-            })
-            if(responce == undefined) return
-            const msg = responce.array()[0]
-            if(msg.author.bot) return
-            if(msg == undefined) reject(`Tu as mis trop de temps à faire ton signalement, merci de refaire .report dans ${config.channels.salon_bot}`)
-            await resolve({questionMsg, msg})
-        }).catch(() => {return message.reply(`Je ne peux pas t'envoyer de messages privés, merci de vérifier que tu acceptes les messages privés venant de ce serveur`)})
-    })
-}
 
 class report {
     constructor(){}
@@ -37,7 +20,7 @@ class report {
             .setAuthor("Report de " + message.author.username, message.author.avatarURL(), "http://"+message.author.id+".fr")
             .addField("Envers", reportedPlayer.msg.content)
             .addField("Raison", reportReason.msg.content)
-        config.channels.reportcheck.send(embed).then(m => reportReact.reportReact(m, reportedPlayer.msg.content, reportReason.msg.content))
+        config.channels.reportcheck.send(embed).then(m => reportReact(m, reportedPlayer.msg.content, reportReason.msg.content))
         await message.author.send("Ton report a bien été pris en compte, Merci")
     }
 
