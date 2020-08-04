@@ -17,20 +17,20 @@ class onlines{
 			}
 			message.channel.send(`Serveur ${args[1]} introuvable !`)
 		}else{
-			let players = ''
+			let data = ''
 			let s
 			if(vars.totalonlines.length==1){
 				s = ""
-				players = "1 joueur"
+				data = "1 joueur"
 			}else{
 				s = "s"
-				players = vars.totalonlines.length+" joueurs"
+				data = vars.totalonlines.length+" joueurs"
 			}
 
 			if(vars.totalonlines.length!=0){
-				players = players + " : \n"+vars.totalonlines.join(", ")
+				data = data + " : \n"+vars.totalonlines.join(", ").replace("*", "\\*").replace("_", "\\_")
 			}
-			message.channel.send(`Connecté${s} actuellement sur le serveur : ${players}`)	
+			message.channel.send(`Connecté${s} actuellement sur le serveur : ${data}`)
 		}		
     }
 }
