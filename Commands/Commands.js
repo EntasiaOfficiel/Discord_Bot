@@ -90,4 +90,4 @@ bot.on('message', async message => {
 	}
 })
 
-module.exports.variables = { MyCommands: loadedCmds }
+module.exports.variables = { loadedCmds }

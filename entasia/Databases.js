@@ -1,6 +1,7 @@
 
 const pass = require('entasia/pass')
-const SQLite = new (require('sqlite3').verbose().Database("Data/database.db"))
+const a = require('sqlite3').verbose()
+const SQLite = new a.Database("Data/database.db")
 
 const SQL = require('mysql').createConnection({
 	host: pass.sql.host,

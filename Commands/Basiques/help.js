@@ -1,4 +1,4 @@
-const { MyCommands } = require('../Commands.js').variables
+const { loadedCmds } = require('../Commands.js').variables
 class help{
 	constructor(){
 		this.alias = ["aide"]
@@ -11,9 +11,9 @@ class help{
 			let cmdtypes = []
 			let cmdtypesn = []
 
-			for(let i in MyCommands){
-				if(typeof MyCommands[i] == "string")continue
-				let inst = MyCommands[i]
+			for(let i in loadedCmds){
+				if(typeof loadedCmds[i] == "string")continue
+				let inst = loadedCmds[i]
 
 				if(!cmdtypes[inst.type]){
 					cmdtypes[inst.type] = ""
@@ -29,24 +29,23 @@ class help{
 			}
 		}else{
 			let cmdname = arg[1].toLowerCase()
-			if(MyCommands[cmdname]){
-				if(typeof MyCommands[cmdname] == "string") l = MyCommands[cmdname]
-				let cmd = new MyCommands[l]
+			if(loadedCmds[cmdname]){
+				let cmd = loadedCmds[cmdname]
+				if(typeof cmd == "string") cmd = loadedCmds[cmd]
 				embed.addField("Commande : ", "**"+cmdname+"**")
 				embed.addField("Description", config.descriptions[cmdname]||"Aucune")
 				embed.addField("Type", cmd.type, true)
 
 				let exec
-				if(cmd.executable)exec = "De partout"
-				else if(thecmd.executable == "text") exec = "Dans les salons texte"
-				else if(thecmd.executable == "dm") exec = "Dans les salons privés"
-				else return
+				if(cmd.executable == "text") exec = "Dans les salons texte"
+				else if(cmd.executable == "dm") exec = "Dans les salons privés"
+				else exec = "De partout"
 				embed.addField("Executable", exec, true)
 
 				embed.addField("Permission", cmd.perm||"Aucune", true)
-				if(thecmd.alias){
+				if(cmd.alias){
 					let aliases = ""
-					for(i of thecmd.alias)aliases += i+", "
+					for(let i of cmd.alias)aliases += i+", "
 					embed.addField("Aliases", aliases.substr(0, aliases.length-2), true)
 				}
 			}else{

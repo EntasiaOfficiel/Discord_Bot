@@ -26,6 +26,10 @@ bot.on("ready", async function(){
 
 	config.entasia = bot.guilds.cache.get(config.entasia)
 	config.owner = bot.users.cache.get(config.owner)
+	if(!config.entasia){
+		logger("serveur Entasia non trouvé ! Arret")
+		process.exit()
+	}
 	
 	for(let [k, v] of bot.guilds.cache){
 		if(k!=config.entasia.id){

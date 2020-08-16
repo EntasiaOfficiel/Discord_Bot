@@ -1,5 +1,5 @@
 {
-  "dev": false,
+  "dev": true,
   "prefix": ".",
   "talkchar": "$",
   "owner": "173542833364533249",
@@ -14,7 +14,6 @@
     "oui": "632929859768811521",
     "non": "632929850872692766",
     "ping": "632930155832147971",
-    "report": "632930038064611338",
     "money": "632885393649303553"
   },
 
@@ -38,7 +37,6 @@
     "logs": "632258455767351296",
     "logs_messages": "707957547889459230",
 
-    "report": "632927046728679444",
     "reportcheck": "632927683864428565",
     "pub": "632927644983230505",
     "pubcheck": "632927655993278475",
@@ -74,6 +72,7 @@
     "roleping": "Te permet de rendre un role mentionnable pendant 8 secondes",
     "sondage": "Démarre un sondage ! ",
     "two": "Il ne vaut mieux pas chercher à comprendre cette commande",
-    "yn": "Ajoute les emotes :oui: et :non: au dernier message envoyé"
+    "yn": "Ajoute les emotes :oui: et :non: au dernier message envoyé",
+    "report": "Signaler un joueur du serveur"
   }
 }
