@@ -36,16 +36,18 @@ async function askInformation(message, askMessage = "Ce message ne devrait pas a
 	return new Promise(async(resolve, reject) => {
 		message.author.send(askMessage).then(async questionMsg => {
 
-			const responce = await questionMsg.channel.awaitMessages(filter, {max: 1, time: time, errors: ['time']}).catch(async () =>  {
+			const response = await questionMsg.channel.awaitMessages(filter, {max: 1, time: time, errors: ['time']}).catch(async () =>  {
 				reject(`Tu as mis trop de temps à faire ton signalement, merci de refaire .report dans ${config.channels.salon_bot}`)
 				return
 			})
-			if(responce == undefined) return
-			const msg = responce.array()[0]
+			if(response == undefined) return
+			const msg = response.array()[0]
 			if(msg.author.bot) return
 			if(msg == undefined) reject(`Tu as mis trop de temps à faire ton signalement, merci de refaire .report dans ${config.channels.salon_bot}`)
-			await resolve({questionMsg, msg})
-		}).catch(() => {return message.reply(`Je ne peux pas t'envoyer de messages privés, merci de vérifier que tu acceptes les messages privés venant de ce serveur`)})
+			else await resolve({questionMsg, msg})
+		}).catch(() => {
+			return message.reply(`Je ne peux pas t'envoyer de messages privés, merci de vérifier que tu acceptes les messages privés venant de ce serveur`)
+		})
 	})
 }
 
