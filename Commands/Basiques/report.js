@@ -13,13 +13,15 @@ class report {
 
         let reportedPlayer = await askInformation(message, "Quel est le pseudo de la personne que tu veux signaler ? :smile:").catch(e => {return message.channel.send(e)})
         if(reportedPlayer == undefined || reportedPlayer.msg == undefined) return
-        const reportReason = await askInformation(message, "Quelle est la raison du signalement ? :smiley:").catch(e => {return message.channel.send(e)})
+        const reportReason = await askInformation(message, "Quelle est la raison du signalement ? :smiley: (tu peux ajouter un screen pour appuyer ton signalement)")
+            .catch(e => {return message.channel.send(e)})
         if(reportReason == undefined || reportReason.msg == undefined) return
-        //console.log("debug 1 : " + reportedPlayer.msg.constructor + "\n" + "debug 2" + reportReason.msg)
         const embed = new MessageEmbed()
             .setAuthor("Report de " + message.author.username, message.author.avatarURL(), "http://"+message.author.id+".fr")
             .addField("Envers", reportedPlayer.msg.content)
             .addField("Raison", reportReason.msg.content)
+
+        if (!reportReason.msg.attachments[0] == undefined) embed.addField("Fichier intégré au signalement", reportReason.msg.attachments.first().url)
         config.channels.reportcheck.send(embed).then(m => reportReact(m, reportedPlayer.msg.content, reportReason.msg.content))
         await message.author.send("Ton report a bien été pris en compte, Merci")
     }
