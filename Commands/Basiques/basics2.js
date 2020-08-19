@@ -34,6 +34,7 @@ class github{
 }
 
 const quizix = config.entasia.members.cache.get("372295146987061250")
+const WeeskyBDW = config.entasia.members.cache.get("173542833364533249")
 
 class credits{
 	constructor(){
@@ -43,6 +44,7 @@ class credits{
 		message.channel.send(new CustomEmbed([message.author.username, "credits"]).setHeader("Crédits du bot :")
 		.setColor('00ffad')
 		.addField(config.owner.tag, "Développement du bot")
+		.addField(WeeskyBDW.user.tag, "Contribution au développement du bot")
 		.addField(quizix.user.tag, "Images/Emotes utilisées par le bot")
 		)
 	}

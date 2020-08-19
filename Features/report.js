@@ -1,4 +1,4 @@
-async function reportReact(message, reportedPlayer, reportReason){
+async function reportReact(message, reportedPlayer, reportReason, attachment){
 	await message.react("✅")
 	await message.react("❌")
 	await message.react("🤐")
@@ -19,6 +19,7 @@ async function reportReact(message, reportedPlayer, reportReason){
 			embed.addField("de", u.user.tag)
 			embed.addField("envers", reportedPlayer)
 			embed.addField("raison", reportReason)
+			if (attachment) embed.addField("Fichier intégré au signalement", attachment.url)
 			functions.logInfo(embed)
 		}
 	})
