@@ -19,14 +19,15 @@ class report {
             .catch(e => {return message.channel.send(e)})
         const reportReason = await askInformation(message, "Quelle est la raison du signalement ? :smiley: (tu peux ajouter un screen pour appuyer ton signalement)")
             .catch(e => {return message.channel.send(e)})
-        if(reportReason || reportReason.msg) return
+        if(!reportReason || !reportedPlayer) return
+        if (!reportedPlayer.msg.content) return message.author.send("Erreur: Vous devez spécifié un joueur, les screenshots ne sont pas autorisés comme pseudo de joueur")
         const reason = reportReason.msg.content ? reportReason.msg.content : "Aucune raison spécifié"
         const embed = new MessageEmbed()
             .setAuthor("Report de " + message.author.username, message.author.avatarURL(), "http://"+message.author.id+".fr")
             .addField("Envers", reportedPlayer.msg.content)
             .addField("Raison", reason)
-
         if (reportReason.msg.attachments.first()) embed.addField("Fichier intégré au signalement", reportReason.msg.attachments.first().url)
+
         config.channels.reportcheck.send(embed).then(m => reportReact(m, reportedPlayer.msg.content, reason, reportReason.msg.attachments.first()))
         message.author.send("Ton report a bien été pris en compte, Merci")
     }

@@ -19,7 +19,7 @@ async function reportReact(message, reportedPlayer, reportReason, attachment){
 			embed.addField("de", u.user.tag)
 			embed.addField("envers", reportedPlayer)
 			embed.addField("raison", reportReason)
-			if (attachment) embed.addField("Fichier intégré au signalement", attachment.url)
+			if (attachment) embed.addField("Fichier intégré au signalement", attachment)
 			functions.logInfo(embed)
 		}
 	})
@@ -31,7 +31,7 @@ config.channels.reportcheck.messages.fetch({limit: 100}).then((data)=>{
 			else reportReact(msg)
 		}
 })
-
+let cache_message
 async function askInformation(message, askMessage = "Ce message ne devrait pas apparaitre, merci de contacter iTrooz_#2050 ou WeeskyBDW#6172", time = 30000, filter = (user => message.author.bot == false)) {
 	if(message === undefined) return console.log("[Erreur] Commande de report.js : le message n'a pas été spécifié dans la fonction ")
 	return new Promise(async(resolve, reject) => {
@@ -43,11 +43,16 @@ async function askInformation(message, askMessage = "Ce message ne devrait pas a
 			})
 			if(response == undefined) return
 			const msg = response.array()[0]
-			if(msg.author.bot) return
+			if(msg.author.bot || msg.system) {
+				if (message) cache_message = message
+				await askInformation(message ? message : cache_message, askMessage, time, filter)
+				reject()
+			}
 			if(msg == undefined) reject(`Tu as mis trop de temps à faire ton signalement, merci de refaire .report dans ${config.channels.salon_bot}`)
 			else await resolve({questionMsg, msg})
 		}).catch(() => {
-			return message.reply(`Je ne peux pas t'envoyer de messages privés, merci de vérifier que tu acceptes les messages privés venant de ce serveur`)
+			return message.reply("wtf")
+			//return message.reply(`Je ne peux pas t'envoyer de messages privés, merci de vérifier que tu acceptes les messages privés venant de ce serveur`)
 		})
 	})
 }
