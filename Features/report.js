@@ -31,30 +31,31 @@ config.channels.reportcheck.messages.fetch({limit: 100}).then((data)=>{
 			else reportReact(msg)
 		}
 })
-let cache_message
-async function askInformation(message, askMessage = "Ce message ne devrait pas apparaitre, merci de contacter iTrooz_#2050 ou WeeskyBDW#6172", time = 30000, filter = (user => message.author.bot == false)) {
-	if(message === undefined) return console.log("[Erreur] Commande de report.js : le message n'a pas été spécifié dans la fonction ")
-	return new Promise(async(resolve, reject) => {
-		message.author.send(askMessage).then(async questionMsg => {
 
-			const response = await questionMsg.channel.awaitMessages(filter, {max: 1, time: time, errors: ['time']}).catch(async () =>  {
-				reject(`Tu as mis trop de temps à faire ton signalement, merci de refaire .report dans ${config.channels.salon_bot}`)
-				return
-			})
-			if(response == undefined) return
-			const msg = response.array()[0]
-			if(msg.author.bot || msg.system) {
-				if (message) cache_message = message
-				await askInformation(message ? message : cache_message, askMessage, time, filter)
-				reject()
-			}
-			if(msg == undefined) reject(`Tu as mis trop de temps à faire ton signalement, merci de refaire .report dans ${config.channels.salon_bot}`)
-			else await resolve({questionMsg, msg})
-		}).catch(() => {
-			return message.reply("wtf")
-			//return message.reply(`Je ne peux pas t'envoyer de messages privés, merci de vérifier que tu acceptes les messages privés venant de ce serveur`)
-		})
+async function sendPM(msg, text) {
+	return await msg.author.send(text).catch(()=>{
+		msg.channel.send("Je ne peux pas t'envoyer de message privé ! Vérifie que tu acceptes bien les MPs des membres d'Entasia")
 	})
 }
 
-module.exports = { reportReact, askInformation}
+async function askInformation(message, text, dynamicFilter = () => true) {
+	return new Promise(async(resolve, reject) => {
+		let questionMsg = await sendPM(message, text)
+		if(questionMsg==null) return reject()
+		
+		let response = await questionMsg.channel.awaitMessages((msg)=>{
+			if(msg.author.bot)return false
+			if(msg.system)return false
+			return dynamicFilter(msg)
+		}, {max: 1, time: 30000})
+		if(response){
+			let msg = response.array()[0]
+			if(msg)	return resolve(msg)
+			
+		}
+		return reject(`Tu as mis trop de temps à faire ton signalement, merci de refaire .report dans ${config.channels.salon_bot}`)
+		
+	})
+}
+
+module.exports = { sendPM, reportReact, askInformation }
