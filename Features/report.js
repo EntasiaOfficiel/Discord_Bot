@@ -1,7 +1,4 @@
-async function reportReact(message, reportedPlayer, reportReason, attachment){
-	await message.react("✅")
-	await message.react("❌")
-	await message.react("🤐")
+async function reportReact(message){
 	var collector = message.createReactionCollector((reaction, user) => {
 		if(user.bot)return
 		let u = message.guild.members.cache.get(message.embeds[0].author.url.substr(7, 18))
@@ -17,12 +14,21 @@ async function reportReact(message, reportedPlayer, reportReason, attachment){
 				embed.addField("Status", "Dénonciation refusé")
 			}else embed.addField("Status", "Dénonciation étouffée")
 			embed.addField("de", u.user.tag)
-			embed.addField("envers", reportedPlayer)
-			embed.addField("raison", reportReason)
-			if (attachment) embed.addField("Fichier intégré au signalement", attachment)
-			functions.logInfo(embed)
+
+			let fields = message.embeds[0].fields
+			if(fields.length>=2){
+				embed.addField("envers", fields[0].value)
+				embed.addField("raison", fields[1].value)
+				if(fields.length==3){
+					embed.addField("Fichier(s) intégré(s) : ", fields[2].value)
+				}
+				functions.logInfo(embed)
+			}
 		}
 	})
+	await message.react("✅")
+	await message.react("❌")
+	await message.react("🤐")
 }
 
 config.channels.reportcheck.messages.fetch({limit: 100}).then((data)=>{
@@ -51,7 +57,6 @@ async function askInformation(message, text, dynamicFilter = () => true) {
 		if(response){
 			let msg = response.array()[0]
 			if(msg)	return resolve(msg)
-			
 		}
 		return reject(`Tu as mis trop de temps à faire ton signalement, merci de refaire .report dans ${config.channels.salon_bot}`)
 		
