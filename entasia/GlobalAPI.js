@@ -94,7 +94,12 @@ function gettime(d){
 	return `[${tconvert(d.getHours())}:${tconvert(d.getMinutes())}:${tconvert(d.getSeconds())}]`
 }
 logger = (msg)=>{
-	console.log(gettime(new Date())+" "+msg)
+	if(typeof(msg)=="string"){
+		console.log(gettime(new Date())+" "+msg)
+	}else{
+		console.log(gettime(new Date()))
+		console.log(msg)
+	}
 }
 
 const noDeleteMSG = []

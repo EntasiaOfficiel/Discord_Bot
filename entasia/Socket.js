@@ -1,10 +1,13 @@
 const net = require('net')
+const security = require('./SocketSecurity')
 let socketC
 let listeners = []
 let firstsocket = false
 
+const infos = require("entasia/pass").socket
+
 function connect(){
-	socketC = net.createConnection({ port: 23461, host: 'localhost' })
+	socketC = net.createConnection({ host: infos.host, port: infos.port })
 	
 	socketC.on('error', e => {
 		if(e.message == "read ECONNRESET"){
@@ -13,7 +16,7 @@ function connect(){
 			logger("Le socket nous a kické !")
 		}else if(e.message.startsWith("connect ECONNREFUSED")){
 			logger("Connexion au socket refusée !")
-		}else throw e
+		}else logger(e.stack)
 		if(firstsocket){
 			logger("Tentative de reconnexion dans 5 secondes ..\n")
 			setTimeout(() => {
@@ -29,7 +32,7 @@ function connect(){
 
 	socketC.on('connect', () => {
 		logger("Connecté au socket !")
-		socketC.write("log EBH\n")
+		sendData("log EBH")
 		firstsocket=true
 	})
 
@@ -38,14 +41,20 @@ function connect(){
 		if(m.charCodeAt(m.length-2) == 13)m = m.substring(0, m.length-2)
 		else if(m.charCodeAt(m.length-1) == 10) m=m.substring(0, m.length-1)
 		for(let i of m.split("\n")){
-			// logger("Paquet recu : "+i)
 			socketC.emit('line', i)
 		}
 	
 	})
 
-	socketC.on('line', function (m) {
-		let args = m.split(" ")
+	socketC.on('line', function (msg) {
+		let args = msg.split(" ")
+
+		let signature = args.shift()
+		if(!security.verifyMsg(args.join(" "), signature)){
+			logger("Le packet "+msg+" à une signature invalide !")
+			return
+		}
+
 		for(l of listeners){
 			if(args[0]==l.key)l.handler(args.splice(1).join(' '))
 		}
@@ -54,8 +63,9 @@ function connect(){
 
 connect()
 
-function sendData(a){
-	socketC.write(a+"\n")
+function sendData(str){
+	let signature = security.signMsg(str)
+	socketC.write(signature+" "+str+"\n")
 }
 
 function listen(key, handler){
