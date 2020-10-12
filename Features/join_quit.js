@@ -6,7 +6,7 @@ function SecCheck(u){
 	else modAlert[u.id]++
 	if(modAlert[u.id] > 8){
 		delete modAlert[u.id]
-		config.entasia.channels.bureau_staff.send("@everyone Attention : "+u.tag+" à essayé de spamkick les membres du serveur", {disableMentions: false})
+		config.entasia.channels.bureau_staff.send("@everyone Attention : "+u.tag+" a essayé de spamkick les membres du serveur", {disableMentions: false})
 		return config.entasia.members.get(u.id).setRoles([config.roles.muterole])
 	}
 	let cach = modAlert[u.id]
@@ -20,7 +20,7 @@ let stleave = []
 bot.on("guildMemberAdd", function(member){
 	updatem()
 	if(stleave.includes(member.user.id)){
-		config.channels.bureau_staff.send(member.user.tag+" à rejoint le Discord !!!")
+		config.channels.bureau_staff.send(member.user.tag+" a rejoint le Discord !!!")
 	}else{
 		if(mute_cache[member.id]){
 			let embed = new CustomEmbed("Logs")
@@ -30,9 +30,9 @@ bot.on("guildMemberAdd", function(member){
 			.addField("Joueur : ", member.user.tag+" ("+member.id+")")
 			functions.logInfo(embed)
 			member.roles.set([config.roles.mute])
-			config.channels.mute.send("rebonjour "+member.toString()+" ! Tu ne pensais pas t'en tirer comme ca, pas vrai ? ^^")
+			config.channels.mute.send("rebonjour "+member.toString()+" ! Tu ne pensais pas t'en tirer comme ça, pas vrai ? ^^")
 		}else{
-			config.channels.accueil.send(member.toString()+" à rejoint le Discord d'Entasia ! 😄")
+			config.channels.accueil.send(member.toString()+" a rejoint le Discord d'Entasia ! 😄")
 			member.roles.set([config.roles.default])
 		}
 	}
@@ -42,7 +42,7 @@ bot.on("guildMemberAdd", function(member){
 bot.on("guildMemberRemove", function(member){
 	updatem()
 	if(member.roles.cache.has(config.roles.staff)){
-		config.channels.bureau_staff.send(member.user.tag+" à quitté le Discord !!!")
+		config.channels.bureau_staff.send(member.user.tag+" a quitté le Discord !!!")
 		stleave.push(member.user.id)
 	}else{
 		setTimeout(async()=>{
@@ -73,7 +73,7 @@ bot.on("guildMemberRemove", function(member){
 					
 					let b = "! KA-BOOM !"
 					if(entry.reason) b = "pour **" + entry.reason+"**"
-					return config.channels.accueil.send(`**${member.displayName}** à été banni par ${entry.executor} ${b}`)
+					return config.channels.accueil.send(`**${member.displayName}** a été banni par ${entry.executor} ${b}`)
 				}
 			}
 			
@@ -83,7 +83,7 @@ bot.on("guildMemberRemove", function(member){
 				.addField("Type : ", "Discord quitté")
 				.addField("Joueur : ", member.user.tag+" ("+member.id+")")
 				functions.logInfo(embed)
-			}else config.channels.accueil.send(member.displayName+" à quitté le Discord d'Entasia ! Pourquoi ):")
+			}else config.channels.accueil.send(member.displayName+" a quitté le Discord d'Entasia ! Pourquoi ):")
 			return
 		}, 500)
 	}
